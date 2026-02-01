@@ -5,6 +5,15 @@
 #define WORLD_Y 4
 #define WORLD_Z 8
 
+Vector3 VoxelToWorld(int x, int y, int z) {
+    return (Vector3){
+        x - WORLD_X/2.0f,
+        y - WORLD_Y/2.0f,
+        z - WORLD_Z/2.0f
+    };
+}
+
+
 int main(void) {
 	const int screenWidth = 960;
 	const int screenHeight = 540;
@@ -65,11 +74,7 @@ int main(void) {
 
 		            if (!voxels[x][y][z]) continue;
 
-		            Vector3 pos = {
-		                (float)(x - hx),
-		                (float)(y - hy),
-		                (float)(z - hz)
-		            };
+		            Vector3 pos = VoxelToWorld(x, y, z);
 
 		            DrawModel(CubeModel, pos, 1.0f, LIME);
 		            DrawCubeWires(pos, 1.0f, 1.0f, 1.0f, BLACK);
